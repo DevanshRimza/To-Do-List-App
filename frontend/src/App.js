@@ -12,7 +12,7 @@ function App() {
   const addItem = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/item', { "item": itemText });
+      const res = await axios.post('https://to-do-list-app-phi-rust.vercel.app/api/item', { "item": itemText });
       setListItems(prev => [...prev, res.data]);
       setItemText('');
     } catch (error) {
@@ -22,7 +22,7 @@ function App() {
 
   const deleteItem = async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/api/item/${id}`);
+      const res = await axios.delete(`https://to-do-list-app-phi-rust.vercel.app/api/item/${id}`);
       console.log(res.data);
       const newListItems = listItems.filter(item => item._id !== id);
       setListItems(newListItems);
@@ -33,7 +33,7 @@ function App() {
 
   const updateItem = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/item/${isUpdating}`, { item: updateItemText });
+      const res = await axios.put(`https://to-do-list-app-phi-rust.vercel.app/api/item/${isUpdating}`, { item: updateItemText });
       console.log(res.data);
       const updatedItemIndex = listItems.findIndex(item => item._id === isUpdating);
       const updatedItem = listItems[updatedItemIndex].item = updateItemText;
@@ -47,7 +47,7 @@ function App() {
 
   const toggleCompletion = async (id, isCompleted) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/item/${id}`, { isCompleted: !isCompleted });
+      const res = await axios.put(`https://to-do-list-app-phi-rust.vercel.app/api/item/${id}`, { isCompleted: !isCompleted });
       setListItems(listItems.map(item =>
         item._id === id ? { ...item, isCompleted: !isCompleted } : item
       ));
@@ -60,7 +60,7 @@ function App() {
   useEffect(() => {
     const getItemsList = async (e) => {
       try {
-        const res = await axios.get('http://localhost:5000/api/items');
+        const res = await axios.get('https://to-do-list-app-phi-rust.vercel.app/api/items');
         setListItems(res.data);
         console.log(res);
       } catch (error) {
